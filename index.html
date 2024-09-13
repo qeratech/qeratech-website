@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QeraTech - Custom Software Solutions</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            background-color: #FFD9C2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+        }
+        .container {
+            text-align: center;
+            max-width: 90%;
+        }
+        #word-display {
+            font-size: 6vw;
+            font-weight: normal;
+            height: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            #word-display {
+                font-size: 8vw;
+            }
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .fade-out {
+            animation: fadeOut 1.5s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="word-display"></div>
+    </div>
+
+    <script>
+        const text = "We're QeraTech. The best custom software solution enterprise in the market. Contact qeratech (at) outlook (dot) com for more.";
+        const words = text.split(' ');
+        let currentIndex = 0;
+        const wordDisplay = document.getElementById('word-display');
+
+        function showNextWord() {
+            if (currentIndex < words.length) {
+                wordDisplay.textContent = words[currentIndex];
+                wordDisplay.classList.remove('fade-out');
+                void wordDisplay.offsetWidth; // Trigger reflow
+                wordDisplay.classList.add('fade-out');
+                currentIndex++;
+                setTimeout(showNextWord, 1500); // Change word every 1.5 seconds
+            } else {
+                currentIndex = 0;
+                setTimeout(showNextWord, 2000); // Pause for 2 seconds before restarting
+            }
+        }
+
+        showNextWord();
+    </script>
+</body>
+</html>
